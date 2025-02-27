@@ -162,7 +162,8 @@
                                         <li><i class="ri-mail-open-line"></i>Email: saugatghimire2003@gmail.com</li>
                                     </ul>
                                     <div class="contact-form contact-form-area wow fadeInUp delay-0-4s">
-                                        <form id="contactForm" class="contactForm" name="contactForm" action="assets/php/form-process.php" method="post">
+                                        <form id="contactForm" class="contactForm" name="contactForm" method="POST">
+                                            <input type="hidden" name="access_key" value="b039b557-c12f-4a9e-aba0-7fea7c26ca70">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -259,6 +260,51 @@
     <script src="assets/js/wow.min.js"></script>
     <!-- SCRIPT JS-->
     <script src="assets/js/script.js"></script>
+
+    <script>
+        const form = document.getElementById('contactForm');
+        const result = document.getElementById('msgSubmit');
+        
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const formData = new FormData(form);
+          const object = Object.fromEntries(formData);
+          const json = JSON.stringify(object);
+          result.innerHTML = "Please wait..."
+        
+            fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                })
+                .then(async (response) => {
+                    let json = await response.json();
+                    if (response.status == 200) {
+                        result.innerHTML = "Form submitted successfully";
+                    } else {
+                        console.log(response);
+                        result.innerHTML = json.message;
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    result.innerHTML = "Something went wrong!";
+                })
+                .then(function() {
+                    form.reset();
+                    setTimeout(() => {
+                        result.style.display = "none";
+                    }, 3000);
+                });
+        });
+        </script>
+
+
+
+
 </body>
 
 </html>

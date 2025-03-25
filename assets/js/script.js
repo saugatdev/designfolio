@@ -1,11 +1,3 @@
-/*
-* ----------------------------------------------------------------------------------------
-Author       : Tanvir Hossain
-Template Name: Wize - Creative Personal Portfolio
-Version      : 1.0                                          
-* ----------------------------------------------------------------------------------------
-*/
-
 
 (function($) {
 
@@ -34,7 +26,7 @@ Version      : 1.0
         $(window).on('load', function() {
 
             $('.loader').fadeOut();
-            $('#preloader-area').delay(350).fadeOut('slow');
+            $('#preloader-area').delay(0).fadeOut('slow');
 
 
             // ## Project Filtering
@@ -449,16 +441,16 @@ Version      : 1.0
         const flat = "M0 2S175 1 500 1s500 1 500 1V0H0Z";
 
         tl.to(".preloader-heading .load-text , .preloader-heading .cont", {
-            delay: 1.5,
+            delay: 0,
             y: -100,
             opacity: 0,
         });
         tl.to(svg, {
-            duration: 0.5,
+            duration: 0,
             attr: { d: curve },
             ease: "power2.easeIn",
         }).to(svg, {
-            duration: 0.5,
+            duration: 0,
             attr: { d: flat },
             ease: "power2.easeOut",
         });
